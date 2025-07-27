@@ -1,0 +1,34 @@
+name: Unzip and Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  unzip-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (Cloudflare Pages needs it)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Unzip all state zip files
+        run: |
+          mkdir extracted
+          for f in *.zip; do
+            unzip -q "$f" -d extracted/"${f%.zip}"
+          done
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: IndexPDF-b
+          directory: extracted
