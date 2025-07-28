@@ -1,0 +1,3 @@
+{ "pattern": "/Maharashtra/sitemap.xml", "function": "Maharashtra/sitemap.xml.js" },
+  { "pattern": "/Tamil Nadu/sitemap.xml",  "function": "Tamil Nadu/sitemap.xml.js" },
+  { "pattern": "/West Bengal/sitemap.xml", "function": "West Bengal/sitemap.xml.js" },
